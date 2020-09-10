@@ -1,5 +1,5 @@
 
-linux_basic  
+## linux_basic  
 01_what_is_linux.md    
 02_pwd_ls_history_cd.md    
 03_variables.md    
@@ -22,7 +22,7 @@ linux_basic
 20_processes_and_services.md    
 20_processes.md  
 
-bash scripting  
+## bash scripting  
 01_first_script.md  
 02_conditionals.md  
 03_arguments.md  
@@ -31,7 +31,7 @@ bash scripting
 06_while_loop.md  
 07_functions.md  
 
-docker  
+## docker  
 01_docker_intro.md  
 02_docker_cli.md  
 03_docker_hub_registry.md  
@@ -45,27 +45,29 @@ docker
 11_create_docker_file.md  
 12_docker_compose.md  
 
-airflow  
+## airflow  
+will be added   
+## git  
 
-git  
+## maven  
+will be added  
 
-maven  
+## crontab  
+will be added  
 
-crontab  
+## devops_ci/cd  
+will be added  
 
-devops_ci/cd  
-
-
-hadoop-hdfs	  
+## hadoop-hdfs	  
 01_introduction_to_hadoop.md   
 02_basic_hdfs_commands.md   
 	
-hadoop_yarn  
+## hadoop_yarn  
 01_introcudtion_to_yarn.md   
 02_basic_yarn_commands.md   
 03_yarn_resource_manager_ui.md   
 
-hive   
+## hive   
 01_introcudtion_to_hive.md   
 02_beeline_connection.md   
 03_sql_editor_connection.md   
@@ -74,12 +76,12 @@ hive
 06_hive_partition_and_bucket.md   
 
 	
-sqoop   
+## sqoop   
 sqoop_import_to_hdfs.md   
 sqoop_import_to_hive.md   
 sqoop_export_to_postgresql.md   
 	
-kafka  
+## kafka  
 01_introduction_to_kafka.md   
 02_kafka_cluster_with_docker.md   
 03_kafka_console_consumer.md   
@@ -89,7 +91,7 @@ kafka
 07_configuration.md   
 
 	
-spark  
+## spark  
 01_introduction_to_spark.md   
 02_sparks_toolset.md   
 03_spark_dataframe.md   
@@ -104,7 +106,7 @@ spark
 12_spark_streaming.md   
 13_spark Machine_learning.md   
 	
-Exercise-1: Sort the most canceled product categories and cancellation amounts in descending order and write to disk in parquet format.  
-Exercise-2: Sort the most canceled products and cancellation amounts in descending order and write them to the hive table in snappy compressed orc format.  
-Final Project-1: Design and execute data pipeline   
-Final Project-2: ML Classification  
+### Exercise-1: Sort the most canceled product categories and cancellation amounts in descending order and write to disk in parquet format.  
+### Exercise-2: Sort the most canceled products and cancellation amounts in descending order and write them to the hive table in snappy compressed orc format.  
+### Final Project-1: Design and execute data pipeline   
+### Final Project-2: ML Classification  
