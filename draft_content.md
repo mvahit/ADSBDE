@@ -47,7 +47,9 @@
 
 ## airflow  
 will be added   
+
 ## git  
+will be added  
 
 ## maven  
 will be added  
@@ -80,6 +82,9 @@ will be added
 sqoop_import_to_hdfs.md   
 sqoop_import_to_hive.md   
 sqoop_export_to_postgresql.md   
+
+## data_generator  
+01_how_to_use_data_generator.md 
 	
 ## kafka  
 01_introduction_to_kafka.md   
