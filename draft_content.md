@@ -31,6 +31,9 @@
 06_while_loop.md  
 07_functions.md  
 
+## git  
+will be added  
+
 ## docker  
 01_docker_intro.md  
 02_docker_cli.md  
@@ -45,14 +48,8 @@
 11_create_docker_file.md  
 12_docker_compose.md  
 
-## airflow  
+## mlflow  
 will be added   
-
-## git  
-will be added  
-
-## maven  
-will be added  
 
 ## crontab  
 will be added  
