@@ -1,3 +1,4 @@
+set hive.server2.logging.operation.level=NONE;
 create database if not exists homecredit;
 create table if not exists homecredit.bureau_orc_snappy (
 SK_ID_CURR int,

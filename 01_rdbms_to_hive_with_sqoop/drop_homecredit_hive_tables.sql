@@ -1,3 +1,4 @@
+set hive.server2.logging.operation.level=NONE;
 DROP table homecredit.application_test_orc_snappy ;
 DROP table homecredit.application_train_orc_snappy ;
 DROP table homecredit.bureau_orc_snappy ;

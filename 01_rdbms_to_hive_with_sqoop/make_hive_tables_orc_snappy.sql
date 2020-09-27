@@ -1,40 +1,44 @@
 SET hive.exec.compress.output=true;
 SET mapred.output.compression.codec=org.apache.hadoop.io.compress.SnappyCodec;
-ALTER table  IF EXISTS homecredit.application_test set fileformat orc;
-ALTER table  IF EXISTS homecredit.application_test set TBLPROPERTIES ('orc.compress' = 'SNAPPY');
-ALTER table IF EXISTS homecredit.application_test RENAME to homecredit.application_test_orc_snappy;
+set hive.server2.logging.operation.level=NONE;
+
+CREATE TABLE homecredit.application_test_orc_snappy
+STORED AS ORC TBLPROPERTIES('ORC.COMPRESS'='SNAPPY') as
+SELECT * FROM homecredit.application_test;
+DROP table homecredit.application_test;
+
+CREATE TABLE homecredit.application_train_orc_snappy
+STORED AS ORC TBLPROPERTIES('ORC.COMPRESS'='SNAPPY') as
+SELECT * FROM homecredit.application_train;
+DROP table homecredit.application_train;
 
 
-ALTER table IF EXISTS homecredit.application_train set fileformat orc;
-ALTER table IF EXISTS homecredit.application_train set TBLPROPERTIES ('orc.compress' = 'SNAPPY');
-ALTER table IF EXISTS homecredit.application_train RENAME to homecredit.application_train_orc_snappy;
+CREATE TABLE homecredit.bureau_orc_snappy
+STORED AS ORC TBLPROPERTIES('ORC.COMPRESS'='SNAPPY') as
+SELECT * FROM homecredit.bureau;
+DROP table homecredit.bureau;
 
+CREATE TABLE homecredit.bureau_balance_orc_snappy
+STORED AS ORC TBLPROPERTIES('ORC.COMPRESS'='SNAPPY') as
+SELECT * FROM homecredit.bureau_balance;
+DROP table homecredit.bureau_balance;
 
-ALTER table IF EXISTS homecredit.bureau set fileformat orc;
-ALTER table IF EXISTS homecredit.bureau set TBLPROPERTIES ('orc.compress' = 'SNAPPY');
-ALTER table IF EXISTS homecredit.bureau RENAME to homecredit.bureau_orc_snappy;
+CREATE TABLE homecredit.credit_card_balance_orc_snappy
+STORED AS ORC TBLPROPERTIES('ORC.COMPRESS'='SNAPPY') as
+SELECT * FROM homecredit.credit_card_balance;
+DROP table homecredit.credit_card_balance;
 
+CREATE TABLE homecredit.installments_payments_orc_snappy 
+STORED AS ORC TBLPROPERTIES('ORC.COMPRESS'='SNAPPY') as
+SELECT * FROM homecredit.installments_payments;
+DROP table homecredit.installments_payments;
 
-ALTER table IF EXISTS homecredit.bureau_balance set fileformat orc;
-ALTER table IF EXISTS homecredit.bureau_balance set TBLPROPERTIES ('orc.compress' = 'SNAPPY');
-ALTER table IF EXISTS homecredit.bureau_balance RENAME to homecredit.bureau_balance_orc_snappy;
+CREATE TABLE homecredit.pos_cash_balance_orc_snappy 
+STORED AS ORC TBLPROPERTIES('ORC.COMPRESS'='SNAPPY') as
+SELECT * FROM homecredit.pos_cash_balance;
+DROP table homecredit.pos_cash_balance;
 
-
-ALTER table IF EXISTS homecredit.credit_card_balance set fileformat orc;
-ALTER table IF EXISTS homecredit.credit_card_balance set TBLPROPERTIES ('orc.compress' = 'SNAPPY');
-ALTER table IF EXISTS homecredit.credit_card_balance RENAME to homecredit.credit_card_balance_orc_snappy;
-
-
-ALTER table IF EXISTS homecredit.installments_payments set fileformat orc;
-ALTER table IF EXISTS homecredit.installments_payments set TBLPROPERTIES ('orc.compress' = 'SNAPPY');
-ALTER table IF EXISTS homecredit.installments_payments RENAME to homecredit.installments_payments_orc_snappy;
-
-
-ALTER table IF EXISTS homecredit.POS_CASH_balance set fileformat orc;
-ALTER table IF EXISTS homecredit.POS_CASH_balance set TBLPROPERTIES ('orc.compress' = 'SNAPPY');
-ALTER table IF EXISTS homecredit.POS_CASH_balance RENAME to homecredit.POS_CASH_balance_orc_snappy;
-
-
-ALTER table IF EXISTS homecredit.previous_application set fileformat orc;
-ALTER table IF EXISTS homecredit.previous_application set TBLPROPERTIES ('orc.compress' = 'SNAPPY');
-ALTER table IF EXISTS homecredit.previous_application RENAME to homecredit.previous_application_orc_snappy;
+CREATE TABLE homecredit.previous_application_orc_snappy 
+STORED AS ORC TBLPROPERTIES('ORC.COMPRESS'='SNAPPY') as
+SELECT * FROM homecredit.previous_application;
+DROP table homecredit.previous_application;

@@ -1,13 +1,15 @@
 #!/bin/bash
 echo "This script is for to transfer tables from postgresql homecredit db to hive homecredit db.
-It will create all hive tables if tables are not exists.
-If there are tables already exists it will truncate all the data first then insert"
+It will drop old and create new all hive tables."
 sleep 10
 echo "This script will start in 10 seconds... If you stop it press Ctrl+C "
 sleep 10
 echo "Dropping old homecredit hive tables"
 beeline -n train -p Ankara06 -u jdbc:hive2://localhost:10000 \
 -f /home/train/advanced_ds_bigdata/01_rdbms_to_hive_with_sqoop/drop_homecredit_hive_tables.sql
+printf "\n\n\n"
+echo "Drop tables completed.g/"
+printf "\n\n\n"
 
 echo "sqoop transfers have just started."
 printf "\n\n\n"
@@ -114,6 +116,6 @@ sqoop import --connect jdbc:postgresql://localhost/homecredit  \
 printf "\n\n\n"
 
 echo "Making hive tables orc snappy"
-beeline -n train -p Ankara06 -u jdbc:hive2://localhost:10000 \
+beeline -n train -w ${HOME}/sqoop.password -u jdbc:hive2://localhost:10000 \
 -f /home/train/advanced_ds_bigdata/01_rdbms_to_hive_with_sqoop/make_hive_tables_orc_snappy.sql
 echo "Convertion hive tables to orc snappy has completed."
