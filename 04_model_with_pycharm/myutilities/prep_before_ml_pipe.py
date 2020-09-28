@@ -61,6 +61,12 @@ class DataPrepBeforeMLPipeline:
         return df2, null_cols_to_drop, null_cols_to_stay
 
     def split_numeric_and_categoric_cols(self, df, label='target'):
+        """
+        Splits categoric(string) numeric(int, double, float) and rest
+        :param df: spark dataframe
+        :param label: To exclude label columns to placed in input cols
+        :return: python lists of categoric(string) numeric(int, double, float) and other columns
+        """
         categoric_cols = []
         numeric_cols = []
         other_cols = []
@@ -89,6 +95,14 @@ class DataPrepBeforeMLPipeline:
         return numeric_cols, categoric_cols, other_cols
 
     def impute_categoric_null_cols(self, df, categoric_cols, null_cols_to_stay, constant='Unknown_'):
+        """
+        Imputes categoric null columns with a constant.
+        :param df: spark dataframe
+        :param categoric_cols: all categoric columns
+        :param null_cols_to_stay: null containing columns to apply imputation
+        :param constant: User defined value to replace nulls.
+        :return: imputed spark dataframe
+        """
 
         null_cat_cols = list(set(categoric_cols).intersection(set(null_cols_to_stay)))
         print(null_cat_cols)
@@ -102,7 +116,14 @@ class DataPrepBeforeMLPipeline:
         return df
 
     def impute_numeric_null_cols(self, df, numeric_cols, null_cols_to_stay, strategy='mean'):
-        #
+        """
+
+        :param df:
+        :param numeric_cols:
+        :param null_cols_to_stay:
+        :param strategy:
+        :return:
+        """
         null_num_cols = list(set(numeric_cols).intersection(set(null_cols_to_stay)))
         null_num_cols_dict = {
             "null_num_cols": null_num_cols,
@@ -126,3 +147,70 @@ class DataPrepBeforeMLPipeline:
             print(col, mean)
 
         return df
+
+    def trim_string_columns(self, df, string_cols):
+        """
+
+        :param df:
+        :param string_cols:
+        :return:
+        """
+        for col_name in string_cols:
+            df = df.withColumn(col_name, F.trim(F.col(col_name)))
+        return df
+
+    def truncate_weak_cat_classes(self, df, categoric_cols, max_distinct_cat=20, weak_class_ratio=0.001):
+        """
+
+        :param df:
+        :param categoric_cols:
+        :param max_distinct_cat:
+        :param weak_class_ratio:
+        :return:
+        """
+
+        # We don't want too much categories if a column has more categories than max_distinct_cat
+        # we want to drop that column
+        max_distinct_cat = max_distinct_cat
+        cat_cols_and_distinc_cls_dict = {}
+        drop_cols_too_many_clss = []
+        for col in categoric_cols:
+            dist_count = df.select(F.countDistinct(col).alias("distinct")).head(1)[0].asDict()["distinct"]
+            if dist_count < max_distinct_cat:
+                cat_cols_and_distinc_cls_dict[col] = dist_count
+                print(col, dist_count)
+            else:
+                print("{} has dropped because it has too many ({}) caregories ".format(col, dist_count))
+                drop_cols_too_many_clss.append(col)
+
+        weak_class_ratio = weak_class_ratio
+        weak_classes_dict = {}
+        df_count = df.count()
+        for col in cat_cols_and_distinc_cls_dict.keys():
+            # calculate weak class total count and class ratio than filter if class ration less than user specified value
+            dummy_df = df.groupBy(col) \
+                .agg(F.count("*").alias("total_count")) \
+                .orderBy(F.desc("total_count")) \
+                .withColumn("class_ratio", F.round(F.col("total_count") / F.lit(df_count), 4)) \
+                .filter(F.col("class_ratio") < weak_class_ratio)
+            dummy_df.show()
+
+            # Make a dictionary col name is key and weak classes value as another dictionary
+            my_dict = dummy_df.select(dummy_df.columns[0]).toPandas().to_dict()
+            print(my_dict)
+            # Get weak classes as list
+            weak_calss_list = list(my_dict[col].values())
+            print(weak_calss_list)
+
+            # filter out rows that contain weak clases
+            df = df.filter(~ (F.col(col).isin(weak_calss_list)))
+            print(df.count())
+
+            # Collect deleted weak classes in a dictionary
+            if weak_calss_list:
+                weak_classes_dict[col] = weak_calss_list
+
+        print("Dropped columns due to too many classes gt {}".format(max_distinct_cat))
+        print("{} rows are deleted.".format(df_count - df.count()))
+
+        return df, weak_classes_dict
