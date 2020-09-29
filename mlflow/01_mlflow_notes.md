@@ -24,5 +24,5 @@ pip install psycopg2
 7. Run mlflow server
 ` (venvspark) [train@localhost mlflow]$ mlflow server --backend-store-uri postgresql+psycopg2://train:Ankara06@localhost:5432/mlflow --default-artifact-root hdfs://localhost:9000/mlflow --host 0.0.0.0 `
 
-8. Open browser and enter [a link](http://localhost:5000/)
+8. Open browser and enter [http://localhost:5000/](http://localhost:5000/)
 
