@@ -192,3 +192,6 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 [W 22:29:13.845 NotebookApp] Notebook model_development_with_spark.ipynb is not trusted
 [I 22:29:19.408 NotebookApp] Starting buffering for b07e7272-8c41-4314-b4d9-96a8ba3a1609:b26ec981136f4a18844db715f6cb7419
 [I 22:29:19.493 NotebookApp] Kernel shutdown: b07e7272-8c41-4314-b4d9-96a8ba3a1609
+[I 05:40:36.475 NotebookApp] Saving file at /model_development_with_spark.ipynb
+
+** (firefox:7871): WARNING **: 06:15:32.298: No marshaller for signature of signal 'PropertiesChanged'

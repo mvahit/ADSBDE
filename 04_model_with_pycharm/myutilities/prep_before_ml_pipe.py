@@ -1,5 +1,5 @@
-from pyspark.sql import functions as F
 import pandas as pd
+from pyspark.sql import functions as F
 
 
 class DataPrepBeforeMLPipeline:
@@ -8,13 +8,15 @@ class DataPrepBeforeMLPipeline:
 
     def drop_too_much_null_cols(self, df, drop_ratio=0.5):
         """
-        Cleans dataframe from null values and drops columns according to drop_ratio.
+        Cleans dataframe from null values and drops columns according to drop_ratio. Main idea here if a column has
+        too many null values (gt drop_ratio) those columns will be dropped.
         If there is too much nulls in a column it is dropped.
         :param df: Spark dataframe to clean
         :param drop_ratio: User specified null_ratio in a column. 0.5 means if half of values a column are null drop that column.
         :return: null cleaned dataframe, staying null column list, dropped null column list
         """
-        # This dict is for pandas dataframe to explore more comfortable null value exploration
+        initial_column_count = len(df.columns)
+        # This dict is for collect info if a column has null value and how many?
         null_dict = {
             "columns": df.columns,
             "null_count": [],
@@ -25,6 +27,7 @@ class DataPrepBeforeMLPipeline:
         # To calculate null_ratio we need to know record count
         df_count = float(df.count())
 
+        # This for loop will iterate all cols of df and search null values
         for col in df.columns:
             # If a column has null, nan or empty value calculate how many?
             null_count = df.filter((df[col].isNull()) |
@@ -58,6 +61,11 @@ class DataPrepBeforeMLPipeline:
 
         # Drop columns gt drop_ratio
         df2 = df.drop(*null_cols_to_drop)
+        last_column_count = len(df2.columns)
+
+        print("{} column has dropped".format(initial_column_count - last_column_count))
+        print("dropped columns ({})".format(len(null_cols_to_drop)))
+        print(null_cols_to_drop)
         return df2, null_cols_to_drop, null_cols_to_stay
 
     def split_numeric_and_categoric_cols(self, df, label='target'):
@@ -72,6 +80,8 @@ class DataPrepBeforeMLPipeline:
         other_cols = []
         label_col = [label]
 
+        # This loop will iterate all df coltypes if a coltype string adds it categoric_cols,
+        # if int, double or float adds it to numeric_cols or adds other_cols
         for col in df.dtypes:
             if col[0] not in label_col:
                 if col[1] == 'string':
@@ -81,17 +91,19 @@ class DataPrepBeforeMLPipeline:
                 else:
                     other_cols.append(col[0])
 
-        print("categoric_cols")
-        print(categoric_cols)
-        print("numeric_cols")
-        print(numeric_cols)
-        print("label_col")
-        print(label_col)
-        if len(df.columns) == (len(categoric_cols) + len(numeric_cols) + len(label_col)):
+        if len(df.columns) == (len(categoric_cols) + len(numeric_cols) + len(label_col) + len(other_cols)):
             print("columns split is successful.")
         else:
             print("there is a mistake column split ops.")
 
+        print("categoric_cols ({})".format(len(categoric_cols)))
+        print(categoric_cols)
+        print("numeric_cols ({})".format(len(numeric_cols)))
+        print(numeric_cols)
+        print("label_col ({})".format(len(label_col)))
+        print(label_col)
+        print("other_cols ({})".format(len(other_cols)))
+        print(other_cols)
         return numeric_cols, categoric_cols, other_cols
 
     def impute_categoric_null_cols(self, df, categoric_cols, null_cols_to_stay, constant='Unknown_'):
@@ -124,20 +136,23 @@ class DataPrepBeforeMLPipeline:
         :param strategy:
         :return:
         """
+        # Discard numeric null columns from null columns
         null_num_cols = list(set(numeric_cols).intersection(set(null_cols_to_stay)))
+
+        # Collect each null num columns and it's corresponding mean in a dictionary
         null_num_cols_dict = {
             "null_num_cols": null_num_cols,
             "means": []
         }
+
+        # Iterate through the each null contains numeric column, compute mean and add to dictionary.
         for col in null_num_cols:
             print(col)
-            df.select(F.mean(col).alias("mean")).show()
             col_mean1 = df.select(F.mean(col).alias("mean")).head(1)
             col_mean = col_mean1[0].asDict()["mean"]
             null_num_cols_dict["means"].append(col_mean)
 
-        # Fill numeric nulls with mean
-        null_num_cols = list(set(numeric_cols).intersection(set(null_cols_to_stay)))
+        # Fill through
         for col, mean in zip(null_num_cols, null_num_cols_dict["means"]):
             df = df.withColumn(col, F.when(((df[col].isNull()) |
                                             (df[col] == "") |
@@ -145,7 +160,7 @@ class DataPrepBeforeMLPipeline:
                                             (df[col] == "null") |
                                             (df[col] == "NULL")), mean).otherwise(F.col(col)))
             print(col, mean)
-
+        print("{} null including cols filled with {}. ".format(len(null_num_cols), strategy))
         return df
 
     def trim_string_columns(self, df, string_cols):
@@ -161,8 +176,8 @@ class DataPrepBeforeMLPipeline:
 
     def truncate_weak_cat_classes(self, df, categoric_cols, max_distinct_cat=20, weak_class_ratio=0.001):
         """
-
-        :param df:
+        Drop categoric cols having too many classes and delete rows of weak classes
+        :param df:spark dataframe.
         :param categoric_cols:
         :param max_distinct_cat:
         :param weak_class_ratio:
@@ -204,13 +219,16 @@ class DataPrepBeforeMLPipeline:
 
             # filter out rows that contain weak clases
             df = df.filter(~ (F.col(col).isin(weak_calss_list)))
-            print(df.count())
+            remaining_row_count = df.count()
+            print("row count after deletion of weak classes", remaining_row_count)
 
             # Collect deleted weak classes in a dictionary
             if weak_calss_list:
                 weak_classes_dict[col] = weak_calss_list
 
         print("Dropped columns due to too many classes gt {}".format(max_distinct_cat))
-        print("{} rows are deleted.".format(df_count - df.count()))
+        print("{} rows are deleted.".format(df_count - remaining_row_count))
+        print("Deleted weak classes and related columns: ")
+        print(weak_classes_dict)
 
         return df, weak_classes_dict
