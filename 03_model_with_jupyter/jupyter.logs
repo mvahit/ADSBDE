@@ -195,3 +195,6 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 [I 05:40:36.475 NotebookApp] Saving file at /model_development_with_spark.ipynb
 
 ** (firefox:7871): WARNING **: 06:15:32.298: No marshaller for signature of signal 'PropertiesChanged'
+[Parent 7871, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builddir/build/BUILD/firefox-68.12.0/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 727
+[I 10:41:57.997 NotebookApp] Shutting down on /api/shutdown request.
+[I 10:41:58.128 NotebookApp] Shutting down 0 kernels

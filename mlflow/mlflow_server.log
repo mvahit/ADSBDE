@@ -1,0 +1,37 @@
+[2020-09-29 20:13:47 +0300] [23388] [INFO] Starting gunicorn 20.0.4
+[2020-09-29 20:13:47 +0300] [23388] [INFO] Listening at: http://0.0.0.0:5000 (23388)
+[2020-09-29 20:13:47 +0300] [23388] [INFO] Using worker: sync
+[2020-09-29 20:13:47 +0300] [23391] [INFO] Booting worker with pid: 23391
+[2020-09-29 20:13:47 +0300] [23392] [INFO] Booting worker with pid: 23392
+[2020-09-29 20:13:48 +0300] [23393] [INFO] Booting worker with pid: 23393
+[2020-09-29 20:13:48 +0300] [23394] [INFO] Booting worker with pid: 23394
+[2020-09-29 20:52:30 +0300] [23388] [CRITICAL] WORKER TIMEOUT (pid:23391)
+[2020-09-29 20:52:30 +0300] [23388] [CRITICAL] WORKER TIMEOUT (pid:23392)
+[2020-09-29 20:52:30 +0300] [23388] [CRITICAL] WORKER TIMEOUT (pid:23393)
+[2020-09-29 20:52:30 +0300] [23388] [CRITICAL] WORKER TIMEOUT (pid:23394)
+[2020-09-29 20:52:30 +0300] [23391] [INFO] Worker exiting (pid: 23391)
+[2020-09-29 20:52:30 +0300] [23392] [INFO] Worker exiting (pid: 23392)
+[2020-09-29 20:52:30 +0300] [23394] [INFO] Worker exiting (pid: 23394)
+[2020-09-29 20:52:30 +0300] [23393] [INFO] Worker exiting (pid: 23393)
+[2020-09-29 20:52:30 +0300] [24630] [INFO] Booting worker with pid: 24630
+[2020-09-29 20:52:30 +0300] [24631] [INFO] Booting worker with pid: 24631
+[2020-09-29 20:52:30 +0300] [24632] [INFO] Booting worker with pid: 24632
+[2020-09-29 20:52:30 +0300] [24633] [INFO] Booting worker with pid: 24633
+[2020-09-30 06:28:29 +0300] [23388] [CRITICAL] WORKER TIMEOUT (pid:24630)
+[2020-09-30 06:28:29 +0300] [23388] [CRITICAL] WORKER TIMEOUT (pid:24631)
+[2020-09-30 06:28:29 +0300] [23388] [CRITICAL] WORKER TIMEOUT (pid:24632)
+[2020-09-30 06:28:29 +0300] [23388] [CRITICAL] WORKER TIMEOUT (pid:24633)
+[2020-09-30 06:28:29 +0300] [24631] [INFO] Worker exiting (pid: 24631)
+[2020-09-30 06:28:29 +0300] [24632] [INFO] Worker exiting (pid: 24632)
+[2020-09-30 06:28:29 +0300] [24630] [INFO] Worker exiting (pid: 24630)
+[2020-09-30 06:28:29 +0300] [24633] [INFO] Worker exiting (pid: 24633)
+[2020-09-30 06:28:30 +0300] [30109] [INFO] Booting worker with pid: 30109
+[2020-09-30 06:28:30 +0300] [30110] [INFO] Booting worker with pid: 30110
+[2020-09-30 06:28:30 +0300] [30111] [INFO] Booting worker with pid: 30111
+[2020-09-30 06:28:30 +0300] [30112] [INFO] Booting worker with pid: 30112
+2020-09-30 06:33:06,702 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2020-09-30 06:45:12,649 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2020-09-30 10:44:27 +0300] [23388] [INFO] Handling signal: term
+[2020-09-30 10:44:27 +0300] [30110] [INFO] Worker exiting (pid: 30110)
+[2020-09-30 10:44:27 +0300] [30112] [INFO] Worker exiting (pid: 30112)
+[2020-09-30 10:44:34 +0300] [23388] [INFO] Shutting down: Master
