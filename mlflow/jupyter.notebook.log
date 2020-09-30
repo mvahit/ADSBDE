@@ -1,0 +1,29 @@
+[I 21:01:54.900 NotebookApp] Serving notebooks from local directory: /home/train/advanced_ds_bigdata/mlflow
+[I 21:01:54.900 NotebookApp] The Jupyter Notebook is running at:
+[I 21:01:54.900 NotebookApp] http://localhost:8888/?token=7a6e55eab01b2c4bf6f3f3ee331804e4fc059e4500a63a27
+[I 21:01:54.901 NotebookApp]  or http://127.0.0.1:8888/?token=7a6e55eab01b2c4bf6f3f3ee331804e4fc059e4500a63a27
+[I 21:01:54.901 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 21:01:54.936 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/train/.local/share/jupyter/runtime/nbserver-4304-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/?token=7a6e55eab01b2c4bf6f3f3ee331804e4fc059e4500a63a27
+     or http://127.0.0.1:8888/?token=7a6e55eab01b2c4bf6f3f3ee331804e4fc059e4500a63a27
+This tool has been deprecated, use 'gio open' instead.
+See 'gio help open' for more info.
+
+[I 21:02:25.631 NotebookApp] Kernel started: 0e35cd72-82e3-4f67-accb-c0fd4917f480
+[I 21:04:25.175 NotebookApp] Saving file at /mlflow_advertising_regression.ipynb
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 1:>                                                          (0 + 1) / 1]                                                                                [Stage 2:>                                                          (0 + 1) / 1]                                                                                [Stage 4:>                                                          (0 + 1) / 1][Stage 5:>                                                          (0 + 1) / 1]                                                                                [Stage 6:>                                                          (0 + 1) / 1][Stage 7:>                                                          (0 + 1) / 1]                                                                                [Stage 16:>                                                         (0 + 1) / 1]                                                                                [Stage 17:>                                                         (0 + 1) / 1]                                                                                [Stage 19:>                                                         (0 + 1) / 2][Stage 19:=============================>                            (1 + 1) / 2]                                                                                [I 21:06:25.618 NotebookApp] Saving file at /mlflow_advertising_regression.ipynb
+[Stage 20:>                                                         (0 + 1) / 2][Stage 20:=============================>                            (1 + 1) / 2]                                                                                2020-09-30 21:06:37,702 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[Stage 21:>                                                         (0 + 1) / 1]                                                                                
+** (firefox:4322): WARNING **: 21:07:47.957: No marshaller for signature of signal 'PropertiesChanged'
+[I 21:08:25.289 NotebookApp] Saving file at /mlflow_advertising_regression.ipynb
+[I 21:12:25.267 NotebookApp] Saving file at /mlflow_advertising_regression.ipynb
+[Stage 37:>                                                         (0 + 1) / 1]                                                                                [Stage 40:>                                                         (0 + 1) / 2][Stage 40:=============================>                            (1 + 1) / 2]                                                                                [Stage 41:>                                                         (0 + 1) / 2][Stage 41:=============================>                            (1 + 1) / 2]                                                                                [I 21:14:25.213 NotebookApp] Saving file at /mlflow_advertising_regression.ipynb
+[I 21:18:25.334 NotebookApp] Saving file at /mlflow_advertising_regression.ipynb
+[I 21:18:30.427 NotebookApp] Saving file at /mlflow_advertising_regression.ipynb
+[Stage 61:=============================>                            (1 + 1) / 2]                                                                                [Stage 62:>                                                         (0 + 1) / 2][Stage 62:=============================>                            (1 + 1) / 2]                                                                                [I 21:20:25.206 NotebookApp] Saving file at /mlflow_advertising_regression.ipynb

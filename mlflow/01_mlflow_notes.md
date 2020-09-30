@@ -21,7 +21,7 @@ pip install psycopg2
 6. Artifact store as HDFS
 ` hdfs dfs -mkdir /user/train/mlflow `
 
-7. Run mlflow server
+7.1. Run mlflow server hdfs artifact
 ```
 (venvspark) [train@localhost mlflow]$ mlflow server \
 --backend-store-uri postgresql+psycopg2://train:Ankara06@localhost:5432/mlflow \
@@ -29,6 +29,16 @@ pip install psycopg2
 --host 0.0.0.0  2> mlflow_server.log &
 ```
 
+7.2. Run mlflow server amazon s3 artifact
+Create train-mlflow bucket on your s3 instance
+export AWS_ACCESS_KEY_ID=xxxxxx
+export AWS_SECRET_ACCESS_KEY=xxxx
+```
+(venvspark) [train@localhost mlflow]$ mlflow server \
+--backend-store-uri postgresql+psycopg2://train:Ankara06@localhost:5432/mlflow \
+--default-artifact-root s3://train-mlflow/homecredit \
+--host 0.0.0.0  2> mlflow_server.log &
+```
 8. See the postgresql tables are created.
 
 ```
@@ -59,6 +69,7 @@ mlflow=# \dt
 9. Open browser and enter [http://localhost:5000/](http://localhost:5000/)
 
 10. Stop mlflow server
+` ps -A | grep gunicorn `
 ` pkill -f gunicorn `
 
 

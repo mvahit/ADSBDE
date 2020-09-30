@@ -1,0 +1,15 @@
+artifact_uri: file:///home/train/advanced_ds_bigdata/mlflow/sklearn_regression/mlruns/0/9e060b0762864b8b9f131badbd5e83b7/artifacts
+end_time: 1601493971154
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 9e060b0762864b8b9f131badbd5e83b7
+run_uuid: 9e060b0762864b8b9f131badbd5e83b7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1601493970529
+status: 3
+tags: []
+user_id: train
